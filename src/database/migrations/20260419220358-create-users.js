@@ -25,8 +25,8 @@ module.exports = {
         type: Sequelize.STRING,
       },
       password_hash: {
-        // mudar depois para FALSE
-        allowNull: true,
+        // mudei para False
+        allowNull: false,
         type: Sequelize.STRING,
       },
       role: {
