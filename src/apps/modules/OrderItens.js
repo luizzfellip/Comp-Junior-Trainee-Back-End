@@ -5,13 +5,27 @@ class OrderItens extends Model {
   static init(sequelize) {
     super.init(
       {
-        quantity: Sequelize.INTEGER,
+        quantity: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
       },
       {
         sequelize,
       },
     );
     return this;
+  }
+
+  static associate(modules) {
+    this.belongsTo(modules.Orders, {
+      foreignKey: "order_id",
+      as: "order",
+    });
+    this.belongsTo(modules.Books, {
+      foreignKey: "book_id",
+      as: "book",
+    });
   }
 }
 

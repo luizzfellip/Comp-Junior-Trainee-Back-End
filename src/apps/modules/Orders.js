@@ -5,22 +5,34 @@ class Orders extends Model {
   static init(sequelize) {
     super.init(
       {
-        total_price: Sequelize.DECIMAL(6, 2),
-        status: Sequelize.ENUM(
-          "pending",
-          "paid",
-          "shipped",
-          "delivered",
-          "cancelled",
-        ),
-        password_hash: Sequelize.STRING,
-        role: Sequelize.ENUM("admin", "customer"),
+        total_price: {
+          type: Sequelize.DECIMAL(10, 2),
+          allowNull: false,
+        },
+        status: {
+          type: Sequelize.ENUM(
+            "pending",
+            "paid",
+            "shipped",
+            "delivered",
+            "cancelled",
+          ),
+          defaultValue: "pending",
+        },
       },
       {
         sequelize,
       },
     );
+
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Users, {
+      foreignKey: "user_id",
+      as: "user",
+    });
   }
 }
 

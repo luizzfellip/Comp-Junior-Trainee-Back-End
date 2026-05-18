@@ -7,8 +7,19 @@ class Users extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        user_name: Sequelize.STRING,
-        email: Sequelize.STRING,
+        user_name: {
+          type: Sequelize.STRING,
+          unique: true,
+        },
+        email: {
+          type: Sequelize.STRING,
+          unique: true,
+          validate: {
+            isEmail: {
+              msg: "Invalid email format",
+            },
+          },
+        },
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         role: Sequelize.ENUM("admin", "customer"),
@@ -20,7 +31,10 @@ class Users extends Model {
 
     this.addHook("beforeSave", async (user) => {
       if (user.password) {
-        user.password_hash = await bcryptjs.hash(user.password, 8);
+        user.password_hash = await bcryptjs.hash(
+          user.password,
+          process.env.SALT,
+        );
       }
     });
 

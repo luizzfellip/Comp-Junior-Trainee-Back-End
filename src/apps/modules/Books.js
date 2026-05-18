@@ -5,12 +5,30 @@ class Books extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.STRING,
-        author: Sequelize.STRING,
-        year: Sequelize.INTEGER,
-        detail: Sequelize.STRING,
-        price: Sequelize.DECIMAL(6, 2),
-        stock: Sequelize.INTEGER,
+        name: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        author: {
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        year: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        },
+        detail: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        price: {
+          type: Sequelize.DECIMAL(6, 2),
+          allowNull: false,
+        },
+        stock: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
       },
       {
         sequelize,
