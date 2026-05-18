@@ -32,5 +32,6 @@ routes.post(
 routes.use(AuthenticationMiddleware);
 
 routes.put("/user", asyncHandler(UserControler.update));
+routes.delete("/user", asyncHandler(UserControler.delete));
 
 module.exports = routes;
