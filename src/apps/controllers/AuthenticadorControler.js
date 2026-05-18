@@ -8,9 +8,9 @@ class AuthenticationController {
 
     let whereClause = {};
     if (email) {
-      whereClause = { email };
+      whereClause.email = email;
     } else if (user_name) {
-      whereClause = { user_name };
+      whereClause.user_name = user_name;
     } else {
       return res
         .status(401)
@@ -31,12 +31,13 @@ class AuthenticationController {
 
     const { id, user_name: userName } = user;
 
-    const token = jwt.sign({ id }, process.env.HASH_BCRYPT, {
+    const { iv, content } = encrypt(id);
+
+    const newId = `${iv}:${content}`;
+
+    const token = jwt.sign({ userId: newId }, process.env.HASH_BCRYPT, {
       expiresIn: process.env.EXPIRE_IN,
     });
-
-    const { iv, content } = encrypt(id);
-    const newId = `${iv}:${content}`;
 
     return res
       .status(200)
