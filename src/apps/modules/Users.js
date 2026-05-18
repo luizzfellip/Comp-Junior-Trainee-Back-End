@@ -33,7 +33,7 @@ class Users extends Model {
       if (user.password) {
         user.password_hash = await bcryptjs.hash(
           user.password,
-          process.env.SALT,
+          Number(process.env.SALT),
         );
       }
     });
