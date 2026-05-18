@@ -13,7 +13,7 @@ const verifyJwt = async (req, res, next) => {
     req.userId = parseInt(decrypt(userId));
 
     return next();
-  } catch (error) {
+  } catch {
     return res.status(401).json({ message: "Unauthorized!" });
   }
 };
