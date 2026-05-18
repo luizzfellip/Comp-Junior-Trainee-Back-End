@@ -9,22 +9,28 @@ const authSchema = require("./apps/schema/auth.schema.json");
 const UserControler = require("./apps/controllers/UserControle");
 const userSchema = require("./apps/schema/create.user.schema.json");
 
+const asyncHandler = require("./apps/middlewares/asyncHandler");
+
 const routes = new Router();
 
 routes.get("/", (req, res) => {
   return res.send("Connected with success!");
 });
 
-routes.post("/user", schemaValidator(userSchema), UserControler.createUser);
+routes.post(
+  "/user",
+  schemaValidator(userSchema),
+  asyncHandler(UserControler.createUser),
+);
 
 routes.post(
   "/auth",
   schemaValidator(authSchema),
-  AuthenticationController.authenticate,
+  asyncHandler(AuthenticationController.authenticate),
 );
 
 routes.use(AuthenticationMiddleware);
 
-routes.put("/user", UserControler.update);
+routes.put("/user", asyncHandler(UserControler.update));
 
 module.exports = routes;
