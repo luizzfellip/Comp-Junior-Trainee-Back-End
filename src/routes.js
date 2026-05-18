@@ -17,8 +17,6 @@ routes.get("/", (req, res) => {
 
 routes.post("/user", schemaValidator(userSchema), UserControler.createUser);
 
-routes.put("user", UserControler.update);
-
 routes.post(
   "/auth",
   schemaValidator(authSchema),
@@ -26,5 +24,7 @@ routes.post(
 );
 
 routes.use(AuthenticationMiddleware);
+
+routes.put("/user", UserControler.update);
 
 module.exports = routes;

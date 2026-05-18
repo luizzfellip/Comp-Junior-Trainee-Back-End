@@ -32,7 +32,14 @@ class UserControler {
   }
 
   async update(req, res) {
-    const { name, old_password, new_password, confirm_new_password } = req.body;
+    const {
+      name,
+      user_name,
+      email,
+      old_password,
+      new_password,
+      confirm_new_password,
+    } = req.body;
 
     const user = await Users.findOne({
       where: {
@@ -44,6 +51,28 @@ class UserControler {
       return res.status(400).json({ message: "User not exists!" });
     }
 
+    if (user_name && user_name !== user.user_name) {
+      const existisUserName = await Users.findOne({
+        where: { user_name },
+      });
+      if (existisUserName) {
+        return res.status(400).json({
+          message: "Username is already in use!",
+        });
+      }
+    }
+
+    if (email && email !== user.email) {
+      const existisUserEmail = await Users.findOne({
+        where: { email },
+      });
+      if (existisUserEmail) {
+        return res.status(400).json({
+          message: "Email is already in use!",
+        });
+      }
+    }
+
     let encryptedPassword = "";
 
     if (old_password) {
@@ -51,19 +80,27 @@ class UserControler {
         return res.status(401).json({ error: "Old password does not match!" });
       }
 
-      if (new_password != confirm_new_password) {
-        return res
-          .status(401)
-          .json({
-            error: "New password and confirm new password does not match!",
-          });
+      if (!new_password || !confirm_new_password) {
+        return res.status(401).json({
+          error: "We need a new_password and confirm_new_password attributes!",
+        });
       }
 
-      encryptedPassword = await bcryptjs.hash(new_password);
+      if (new_password != confirm_new_password) {
+        return res.status(401).json({
+          error: "New password and confirm new password does not match!",
+        });
+      }
+
+      const saltRounds = Number(process.env.SALT);
+      encryptedPassword = await bcryptjs.hash(new_password, saltRounds);
     }
 
     await Users.update(
       {
+        name: name || user.name,
+        user_name: user_name || user.user_name,
+        email: email || user.email,
         password_hash: encryptedPassword || user.password_hash,
       },
       {
