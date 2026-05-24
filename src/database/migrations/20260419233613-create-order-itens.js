@@ -24,6 +24,11 @@ module.exports = {
         onUpdate: "RESTRICT",
         onDelete: "CASCADE",
       },
+
+      price: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(6, 2),
+      },
       quantity: {
         allowNull: false,
         type: Sequelize.INTEGER,

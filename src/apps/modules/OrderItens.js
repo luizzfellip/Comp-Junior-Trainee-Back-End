@@ -9,6 +9,10 @@ class OrderItens extends Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        price: {
+          type: Sequelize.DECIMAL(6, 2),
+          allowNull: false,
+        },
       },
       {
         sequelize,
