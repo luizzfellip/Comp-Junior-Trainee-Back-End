@@ -1,5 +1,6 @@
 const { decryptedToken } = require("../../utils/token");
 const { decrypt } = require("../../utils/cript");
+const User = require("../modules/Users");
 
 const verifyJwt = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -10,7 +11,13 @@ const verifyJwt = async (req, res, next) => {
 
   try {
     const { userId } = await decryptedToken(authHeader);
-    req.userId = parseInt(decrypt(userId));
+    const id = parseInt(decrypt(userId));
+
+    const user = await User.findByPk(id);
+    if (!user) return res.status(401).json({ message: "Unauthorized!" });
+
+    req.userId = id;
+    req.user = user;
 
     return next();
   } catch {
