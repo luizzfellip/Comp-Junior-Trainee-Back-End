@@ -2,19 +2,10 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema#",
   "title": "CreateBookSchema",
   "type": "object",
-
   "properties": {
-    "name": {
-      "type": "string"
-    },
-    "author": {
-      "type": "string"
-    },
-    "year": {
-      "type": "integer"
-    },
-    "detail": {
-      "type": "string"
+    "isbn": {
+      "type": "string",
+      "pattern": "^[0-9]{13}$"
     },
     "price": {
       "type": "number",
@@ -23,8 +14,9 @@
       "maximum": 9999.99
     },
     "stock": {
-      "type": "integer"
+      "type": "integer",
+      "minimum": 0
     }
   },
-  "required": ["name", "author", "year", "detail", "price", "stock"]
+  "required": ["isbn", "price", "stock"]
 }

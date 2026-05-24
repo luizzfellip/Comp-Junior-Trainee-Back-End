@@ -12,7 +12,8 @@ const createUserSchema = require("./apps/schema/create.user.schema.json");
 const updateUserSchema = require("./apps/schema/update.user.schema.json");
 
 const BookController = require("./apps/controllers/BookController");
-const bookSchema = require("./apps/schema/create.book.schema.json");
+const createBookSchema = require("./apps/schema/create.book.schema.json");
+const createManualBookSchema = require("./apps/schema/create.manual.book.schema.json");
 
 const asyncHandler = require("./apps/middlewares/asyncHandler");
 
@@ -43,23 +44,21 @@ routes.put(
 );
 routes.delete("/user", asyncHandler(UserControler.delete));
 
-routes.get(
-  "/book",
-  schemaValidator(bookSchema),
-  asyncHandler(BookController.getBooks),
-);
+routes.get("/book", asyncHandler(BookController.getBooks));
 routes.use(AdminAuthorizeMiddleware("admin"));
 
-routes.put(
-  "/book/:id",
-  schemaValidator(bookSchema),
-  asyncHandler(BookController.updateBook),
-);
+routes.put("/book/:id", asyncHandler(BookController.updateBook));
 
 routes.post(
   "/book",
-  schemaValidator(bookSchema),
+  schemaValidator(createBookSchema),
   asyncHandler(BookController.createBook),
+);
+
+routes.post(
+  "/book/manual",
+  schemaValidator(createManualBookSchema),
+  asyncHandler(BookController.createManualbook),
 );
 
 module.exports = routes;
