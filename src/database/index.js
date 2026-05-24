@@ -1,7 +1,8 @@
 const Sequelize = require("sequelize");
 const Users = require("../apps/modules/Users");
+const Books = require("../apps/modules/Books");
 
-const models = [Users];
+const models = [Users, Books];
 const databaseConfig = require("../configs/db");
 
 class Database {

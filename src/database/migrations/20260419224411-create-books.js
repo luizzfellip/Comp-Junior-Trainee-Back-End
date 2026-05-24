@@ -10,7 +10,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      isbn: {
+        type: Sequelize.STRING,
+        unique: true,
+      },
+      publisher: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      title: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -23,9 +31,9 @@ module.exports = {
         allowNull: true,
         type: Sequelize.INTEGER,
       },
-      detail: {
-        allowNull: false,
-        type: Sequelize.STRING,
+      description: {
+        allowNull: true,
+        type: Sequelize.TEXT,
       },
       price: {
         allowNull: false,

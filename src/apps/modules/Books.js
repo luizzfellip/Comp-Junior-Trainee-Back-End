@@ -5,7 +5,11 @@ class Books extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: {
+        isbn: {
+          type: Sequelize.STRING,
+          unique: true,
+        },
+        title: {
           type: Sequelize.STRING,
           allowNull: false,
         },
@@ -13,13 +17,17 @@ class Books extends Model {
           type: Sequelize.STRING,
           allowNull: true,
         },
+        publisher: {
+          allowNull: true,
+          type: Sequelize.STRING,
+        },
         year: {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
-        detail: {
-          type: Sequelize.STRING,
-          allowNull: false,
+        description: {
+          type: Sequelize.TEXT,
+          allowNull: true,
         },
         price: {
           type: Sequelize.DECIMAL(6, 2),
