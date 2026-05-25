@@ -5,6 +5,10 @@ class Orders extends Model {
   static init(sequelize) {
     super.init(
       {
+        user_id: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+        },
         total_price: {
           type: Sequelize.DECIMAL(10, 2),
           allowNull: false,
@@ -22,6 +26,7 @@ class Orders extends Model {
       },
       {
         sequelize,
+        tableName: "orders",
       },
     );
 
@@ -32,6 +37,10 @@ class Orders extends Model {
     this.belongsTo(models.Users, {
       foreignKey: "user_id",
       as: "user",
+    });
+    this.hasMany(models.OrderItems, {
+      foreignKey: "order_id",
+      as: "items",
     });
   }
 }

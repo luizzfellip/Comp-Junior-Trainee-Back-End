@@ -11,6 +11,9 @@ const UserControler = require("./apps/controllers/UserControle");
 const createUserSchema = require("./apps/schema/create.user.schema.json");
 const updateUserSchema = require("./apps/schema/update.user.schema.json");
 
+const OrderController = require("./apps/controllers/OrderController");
+const createOrderSchema = require("./apps/schema/create.order.schema.json");
+
 const BookController = require("./apps/controllers/BookController");
 const createBookSchema = require("./apps/schema/create.book.schema.json");
 const createManualBookSchema = require("./apps/schema/create.manual.book.schema.json");
@@ -45,6 +48,14 @@ routes.put(
 routes.delete("/user", asyncHandler(UserControler.delete));
 
 routes.get("/book", asyncHandler(BookController.getBooks));
+
+routes.post(
+  "/order",
+  schemaValidator(createOrderSchema),
+  asyncHandler(OrderController.createOrder),
+);
+routes.get("/order", asyncHandler(OrderController.getOrders));
+
 routes.use(AdminAuthorizeMiddleware("admin"));
 
 routes.put("/book/:id", asyncHandler(BookController.updateBook));

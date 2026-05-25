@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
+  "title": "CreateOrderSchema",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "bookId": { "type": "integer" },
+          "quantity": { "type": "integer", "minimum": 1 }
+        },
+        "required": ["bookId", "quantity"]
+      }
+    }
+  },
+  "required": ["items"]
+}

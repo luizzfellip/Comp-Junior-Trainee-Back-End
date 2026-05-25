@@ -1,10 +1,18 @@
 const Sequelize = require("sequelize");
 const { Model } = require("sequelize");
 
-class OrderItens extends Model {
+class OrderItems extends Model {
   static init(sequelize) {
     super.init(
       {
+        order_id: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+        },
+        book_id: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+        },
         quantity: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -16,6 +24,7 @@ class OrderItens extends Model {
       },
       {
         sequelize,
+        tableName: "ordersItems",
       },
     );
     return this;
@@ -33,4 +42,4 @@ class OrderItens extends Model {
   }
 }
 
-module.exports = OrderItens;
+module.exports = OrderItems;
