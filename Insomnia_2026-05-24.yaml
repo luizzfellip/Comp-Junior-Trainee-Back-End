@@ -1,0 +1,430 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Trainee Compjunior
+meta:
+  id: wrk_f6d4f6e422134b77af92039220ed93fe
+  created: 1777157098030
+  modified: 1777157098030
+  description: ""
+collection:
+  - url: http://localhost:3000/auth
+    name: Authenticator
+    meta:
+      id: req_50ac3b9f31614259ad6de35c3bc494de
+      created: 1777226298391
+      modified: 1779668500654
+      isPrivate: false
+      description: ""
+      sortKey: -1777226298391
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"user_name" : "joao",
+        	"password" : "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      disabled: true
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzc3MjM1MTI5LCJleHAiOjE3Nzc4Mzk5Mjl9.gRTSCGqDcnh8Yop939TN1n7R542lcdvYO83KklHmJPE
+      prefix: Bearer
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3000/
+    name: Test Connection
+    meta:
+      id: req_5b2ff861f3534144820c0bc208acb863
+      created: 1778881596137
+      modified: 1779454320828
+      isPrivate: false
+      description: ""
+      sortKey: -1777226298291
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.5.0
+        description: ""
+        disabled: false
+      - name: Authorization
+        value: Bearer {{token}}
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - name: User
+    meta:
+      id: fld_6bb143cbb82a451b89d7bc33c52ca645
+      created: 1779454103284
+      modified: 1779572474167
+      sortKey: -1779454103284
+      description: ""
+    children:
+      - url: http://localhost:3000/user
+        name: Create User
+        meta:
+          id: req_1ff96d64aae748dfb21a3e5145629f69
+          created: 1777157133687
+          modified: 1779673682725
+          isPrivate: false
+          description: ""
+          sortKey: -1779454119859
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name" : "luiz",
+            	"user_name" : "luiz",
+            	"email" : "luiz@gmail.com",
+            	"password" : "123",
+            	"role" : "admin"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/user
+        name: Update User
+        meta:
+          id: req_93cbd36caa324045815df8fcb04f19be
+          created: 1777234603880
+          modified: 1779576074218
+          isPrivate: false
+          description: ""
+          sortKey: -1779454119809
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name" : "Joao",
+            	"user_name": "Pedro",
+            	"email" : "teste@gmail.com",
+            	"old_password" : "123",
+            	"new_password" : "123",
+            	"confirm_new_password" : "123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          disabled: true
+          token: "{{eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzc3MjM1OTQx\
+            LCJleHAiOjE3Nzc4NDA3NDF9.Jg5UUFevRPq5JUZJx5cEzHQjKK6C4nwimGPf-Y-Z2Y\
+            4}}"
+          prefix: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/user
+        name: Delete User
+        meta:
+          id: req_f64f047865d34acf889ce96d140fca46
+          created: 1779130602281
+          modified: 1779454129839
+          isPrivate: false
+          description: ""
+          sortKey: -1779454119759
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        authentication:
+          type: none
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Book
+    meta:
+      id: fld_4f6b7266d3c543df9a4f8d2847040f57
+      created: 1779454151342
+      modified: 1779454151342
+      sortKey: -1779454151342
+      description: ""
+    children:
+      - url: http://localhost:3000/book
+        name: Get Book
+        meta:
+          id: req_311cc86c5c0d4fdaa90fc9db327f1c3a
+          created: 1779454159279
+          modified: 1779665294505
+          isPrivate: false
+          description: ""
+          sortKey: -1779454304848
+        method: GET
+        body:
+          mimeType: application/json
+          text: '{"title": "Nexus"}'
+        parameters:
+          - name: search
+            value: Nexus
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/book
+        name: Create Book
+        meta:
+          id: req_e89ed3c83d7a4016b8788267c349bae5
+          created: 1779565300147
+          modified: 1779668535934
+          isPrivate: false
+          description: ""
+          sortKey: -1779565300147
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"isbn" : "9788572837465",
+            	"stock" : 3,
+            	"price": 60
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/book/manual
+        name: Create Manual Book
+        meta:
+          id: req_53132359cf6e44dfaf10a1d634d22733
+          created: 1779663036527
+          modified: 1779664019761
+          isPrivate: false
+          description: ""
+          sortKey: -1779509802497.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"isbn" : "9788535937817",
+            	"title": "Nexux",
+            	"stock" : 3,
+            	"price": 60
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/book/5
+        name: Update Book
+        meta:
+          id: req_8198c0d98ab649ff94bf665b0332804b
+          created: 1779664458894
+          modified: 1779664756960
+          isPrivate: false
+          description: ""
+          sortKey: -1779537551322.25
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title" : "Nexus"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Order
+    meta:
+      id: fld_41ffb41fec564da58d2f81ee048c845e
+      created: 1779667178681
+      modified: 1779667178681
+      sortKey: -1779667178681
+      description: ""
+    children:
+      - url: http://localhost:3000/order
+        name: Create Order
+        meta:
+          id: req_a0440be0fa8e4a88b1fb05eea7dd1d78
+          created: 1779668027820
+          modified: 1779668832382
+          isPrivate: false
+          description: ""
+          sortKey: -1779668041649
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "items": [
+                { "bookId": 1, "quantity": 1 }
+              ]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/order
+        name: Get Order
+        meta:
+          id: req_940442ca43104d0893e4b52504c15e7b
+          created: 1779671640061
+          modified: 1779671685010
+          isPrivate: false
+          description: ""
+          sortKey: -1779616670898
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.5.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_57300a253e4e1e5f42fcf025705c82bffeb0aee0
+    created: 1777157098070
+    modified: 1777157098070
+environments:
+  name: Base Environment
+  meta:
+    id: env_57300a253e4e1e5f42fcf025705c82bffeb0aee0
+    created: 1777157098059
+    modified: 1779670642700
+    isPrivate: false
+  data:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZTBmOWI3NTYyOTA3YzdmOTk1ZmVhNmUxYjYzZDA4YjphNSIsImlhdCI6MTc3OTY3MDYyOCwiZXhwIjoxNzgwMjc1NDI4fQ.P_M6GZPkvid9h1-bxlPnpn6WVNGG3Yib1QCsKQY5zVI
